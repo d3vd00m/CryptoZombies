@@ -30,7 +30,8 @@ contract ZombieFactory {
 
     function _createZombie(string memory _name, uint _dna) private {
     
-    // Add the new zombie to the zombies public array
+    // Create the new zombie with the function arguments (Zombie(_name, _dna)) and add it to the zombies public array (zombie.push).
+    // Define the variable id that define the array index of the zombie we just added (the first array index is 0)
     
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
         
