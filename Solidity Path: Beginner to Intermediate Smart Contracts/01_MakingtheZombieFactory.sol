@@ -47,7 +47,7 @@ contract ZombieFactory {
         return rand % dnaModulus;
     }
     
-    // Now put all the functions togheter by creating a public function that takes an input, the zombie's name, 
+    // Now put all the functions together by creating a public function that takes an input, the zombie's name, 
     // and uses the name to create a zombie with random DNA.
     
     function createRandomZombie(string memory _name) public {
