@@ -65,3 +65,10 @@ contract ZombieFactory {
     }
 
 }
+
+// we're going to be implementing the functionality for our zombies to feed and multiply. 
+// Let's put this logic into its own contract ZombieFeeding that inherits all the methods from ZombieFactory.
+
+contract ZombieFeeding is ZombieFactory {
+    
+}
