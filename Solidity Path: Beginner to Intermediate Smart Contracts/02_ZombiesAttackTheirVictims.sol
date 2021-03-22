@@ -47,13 +47,19 @@ contract ZombieFactory {
         
         emit NewZombie(id, _name, _dna);
     }
-
+    
     function _generateRandomDna(string memory _str) private view returns (uint) {
         uint rand = uint(keccak256(abi.encodePacked(_str)));
         return rand % dnaModulus;
     }
 
+    // In our zombie game, we don't want the user to be able to create unlimited zombies in their 
+    // army by repeatedly calling createRandomZombie.
+    // We want that each player can only call the function once when they first start the game 
+    // in order to create the initial zombie in their army.
+      
     function createRandomZombie(string memory _name) public {
+        require(ownerZombieCount[msg.sender] == 0);
         uint randDna = _generateRandomDna(_name);
         _createZombie(_name, randDna);
     }
