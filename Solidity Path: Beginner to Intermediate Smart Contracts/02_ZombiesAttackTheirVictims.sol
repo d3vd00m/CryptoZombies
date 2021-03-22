@@ -21,17 +21,30 @@ contract ZombieFactory {
     }
 
     Zombie[] public zombies;
+    
     // Let's make our game multi-player by giving the zombies in our database an owner.
     // To store zombie ownership, we're going to use two mappings: 
     // one that keeps track of the address that owns a zombie, 
     // and another that keeps track of how many zombies an owner has.
     
-        mapping (uint => address) public zombieToOwner;
+    mapping (uint => address) public zombieToOwner;
     mapping (address => uint) ownerZombieCount;
-
+    
+    // Let's update our _createZombie method from lesson 1 to assign ownership of the zombie 
+    // to whoever called the function.
+    
     function _createZombie(string memory _name, uint _dna) private {
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
-        // start here
+        
+        // First, after we get back the new zombie's id, let's update our zombieToOwner 
+        //mapping to store msg.sender under that id.
+        
+        zombieToOwner[id] = msg.sender;
+        
+        // Second, let's increase ownerZombieCount for this msg.sender
+        
+        ownerZombieCount[msg.sender]++;
+        
         emit NewZombie(id, _name, _dna);
     }
 
